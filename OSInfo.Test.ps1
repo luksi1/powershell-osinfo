@@ -1,13 +1,13 @@
 Import-Module -force ${PSScriptRoot}\OSInfo.psm1
 
 Describe 'OSInfo' {
-    
+
     Mock New-CimSession -ModuleName OSInfo -MockWith { New-MockObject -Type Microsoft.Management.Infrastructure.CimSession }
     Mock Get-CimSession -ModuleName OSInfo -MockWith { New-MockObject -Type Microsoft.Management.Infrastructure.CimSession }
     Mock Remove-CimSession -ModuleName OSInfo { $true }
 
     Context "get disk information" {
-        
+
         Mock -CommandName Get-CimInstance -ParameterFilter { $ClassName -eq "Win32_logicaldisk" } -ModuleName OSInfo  { @{
             Size = 238713565184;
             DeviceId = "C:";
@@ -19,8 +19,8 @@ Describe 'OSInfo' {
         }}
 
         $disk = Get-DiskInformation -ComputerName "Foo"
-    
-        It "returns the correct disk size" {   
+
+        It "returns the correct disk size" {
             $disk.SizeMB | Should Be 227654.99609375
         }
         It "returns the correct free size in megabytes" {
@@ -35,7 +35,7 @@ Describe 'OSInfo' {
     }
 
     Context "get service information" {
-        
+
         Mock -CommandName Get-CimInstance -ModuleName OSInfo -ParameterFilter { $ClassName -eq "Win32_Service" } { @{
             ProcessId = 0;
             Name = "Foo";
@@ -71,7 +71,5 @@ Describe 'OSInfo' {
             $service.description | Should Be "This is my service"
         }
     }
-    
-
 }
 

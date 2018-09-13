@@ -1,0 +1,6 @@
+---
+sudo: required
+services:
+  - docker
+script:
+  - docker run -t -v $(pwd):/powershell script-analyzer
