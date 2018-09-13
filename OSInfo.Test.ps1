@@ -1,7 +1,12 @@
 Import-Module -force ${PSScriptRoot}\OSInfo.psm1
 
-Describe 'OSInfo' {
+function Get-ADComputer {
+    @{Name="Foo"}
+}
 
+Describe 'OSInfo' {
+    
+    Mock Get-ADComputer { @{Name="Foo"} }
     Mock New-CimSession -ModuleName OSInfo -MockWith { New-MockObject -Type Microsoft.Management.Infrastructure.CimSession }
     Mock Get-CimSession -ModuleName OSInfo -MockWith { New-MockObject -Type Microsoft.Management.Infrastructure.CimSession }
     Mock Remove-CimSession -ModuleName OSInfo { $true }

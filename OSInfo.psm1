@@ -4,7 +4,7 @@ class ADComputer : System.Management.Automation.ValidateEnumeratedArgumentsAttri
     [void]  ValidateElement([object]$argument)
     {
         try {
-            $computerName = get-adcomputer $argument
+            $computerName = Get-ADComputer $argument
         #} catch [Microsoft.ActiveDirectory.Management.ADIdentityNotFoundException] {  //how do we handle a typenotfound in a catch statement?
         } catch {
             Write-Error "${argument} does not appear to exist in our Active Directory"
