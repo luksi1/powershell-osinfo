@@ -1,3 +1,4 @@
+
 function Get-ADComputer {
 
     [cmdletbinding()]
@@ -5,6 +6,6 @@ function Get-ADComputer {
         [string[]] $Identity
     )
 
-    throw '{0}: StubNotImplemented' -f $MyInvocation.MyCommand
+    return @{"Name"=$Identity}
 
 }
