@@ -4,6 +4,7 @@ function Get-ADComputer {}
 function New-CimSession {}
 function Get-CimSession {}
 function Remove-CimSession {}
+function Get-CimInstance {}
 
 Describe 'OSInfo' {
     
