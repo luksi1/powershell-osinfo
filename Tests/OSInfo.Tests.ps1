@@ -1,18 +1,6 @@
 Import-Module -force ${PSScriptRoot}\..\OSInfo.psm1
-#Import-Module -force ${PSScriptRoot}\Stubs\CimStub.psm1
+Import-Module -force ${PSScriptRoot}\Stubs\CimStub.psm1
 Import-Module -force ${PSScriptRoot}\Stubs\ActiveDirectoryStub.psm1
-
-# With Powershell Core on Linux, these modules do not exist
-# and therefore cannot be used with microsoft/powershell:latest Docker image.
-# So we'll fake them here to avoid a CommandNotFoundException, while running Validate-Command
-# Perhaps there is a way to not run Validate-Command in Pester?
-# Regardless, Powershell Core is still running our validators, even though we have mocked Get-ADComputer
-# So these are commented out for the time being.
-# function Get-ADComputer {}
-# function New-CimSession {}
-# function Get-CimSession {}
-# function Remove-CimSession {}
-# function Get-CimInstance {}
 
 Describe 'OSInfo' {
     

@@ -1,4 +1,3 @@
-
 function New-CimSession {
     [cmdletbinding()]
     param(
@@ -9,7 +8,6 @@ function New-CimSession {
 
 }
 function Get-CimSession {
-
     [cmdletbinding()]
     param(
         [string[]] $ComputerName
@@ -32,8 +30,10 @@ function Get-CimInstance {
 
     [cmdletbinding()]
     param(
+        [parameter(mandatory)]
+        $ClassName,
         [parameter(mandatory, valuefrompipeline, valuefrompipelinebypropertyname)]
-        [string[]] $ClassName
+        $CimSession
     )
 
     throw '{0}: StubNotImplemented' -f $MyInvocation.MyCommand
