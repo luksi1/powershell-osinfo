@@ -5,8 +5,13 @@ Import-Module -force ${PSScriptRoot}\Stubs\ActiveDirectoryStub.psm1
 Describe 'OSInfo' {
     
     Mock Get-ADComputer { @{Name="Foo"} }
-    Mock New-CimSession -ModuleName OSInfo
-    Mock Get-CimSession -ModuleName OSInfo
+    Mock New-CimSession -ModuleName OSInfo { $true }
+    Mock Get-CimSession -ModuleName OSInfo { @{ 
+        'Id'=1;
+        'Name'='CimSession1';
+        'ComputerName'='Foo';
+        'Protocol'='DCOM'
+    }}
     Mock Remove-CimSession -ModuleName OSInfo { $true }
 
     Context "get disk information" {
