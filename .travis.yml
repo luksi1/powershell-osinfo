@@ -5,4 +5,4 @@ services:
 script:
   - docker run -t -v $(pwd):/powershell cvent/psscriptanalyzer:latest
   # CIM modules are not installed on Powershell 6 Core for Ubuntu
-  - docker run -t -v $(pwd):/test adminb/pester-runner:latest
+  # - docker run -t -v $(pwd):/test adminb/pester-runner:latest
