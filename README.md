@@ -16,3 +16,7 @@ Get-DiskInformation -ComputerName MYCOMPUTER
 ### Service Information
 
 Get-ServiceInformation -ComputerName MYCOMPUTER
+
+## ToDo
+- parameter sets
+- dynamic parameters
