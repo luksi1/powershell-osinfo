@@ -1,8 +1,9 @@
 Import-Module -force ${PSScriptRoot}\OSInfo.psm1
 
-function Get-ADComputer {
-    @{Name="Foo"}
-}
+function Get-ADComputer {}
+function New-CimSession {}
+function Get-CimSession {}
+function Remove-CimSession {}
 
 Describe 'OSInfo' {
     
