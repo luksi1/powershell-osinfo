@@ -1,5 +1,6 @@
 Import-Module -force ${PSScriptRoot}\..\OSInfo.psm1
-Import-Module -force ${PSScriptRoot}\Stubs\TestHelper.psm1
+Import-Module -force ${PSScriptRoot}\Stubs\CimStub.psm1
+Import-Module -force ${PSScriptRoot}\Stubs\ActiveDirectoryStub.psm1
 
 # With Powershell Core on Linux, these modules do not exist
 # and therefore cannot be used with microsoft/powershell:latest Docker image.
