@@ -26,6 +26,8 @@ Describe 'OSInfo' {
             FreeSpace = 147779387392;
         }}
 
+        Mock -CommandName _getDynamicValidateSet -ModuleName OSInfo { @("Foo") }
+
         $disk = Get-DiskInformation -ComputerName "Foo"
 
         It "returns the correct disk size" {
