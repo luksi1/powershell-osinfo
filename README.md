@@ -37,5 +37,6 @@ Get-ServiceInformation -ComputerName MYCOMPUTER
 - **add Appveyor and Gitlab CI as continuous integration examples**
 
 ## Examples from the class not included
-- DSC - This doesn't really apply to PowerShell module development
-- Custom classes - I can't see a use case for this here. See above under "classes" for an explanation about why I chose not to include these.
+- **DSC** - Desired State Configuration is essentially an abstraction layer on top of PowerShell for use in configuration management. This doesn't really apply to PowerShell module development.
+- **Custom classes** - I can't see a use case for this here. See above under "classes" for an explanation about why I chose not to include these.
+- **Plaster** - Plaster creates a skeleton project to aid in speeding up module development. Maybe a plaster demo could be created in another repo, but this doesn't really apply here.
