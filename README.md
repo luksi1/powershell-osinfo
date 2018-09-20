@@ -32,9 +32,9 @@ Get-ServiceInformation -ComputerName MYCOMPUTER
 - **Continuous integrations testing with Travis and Powershell Core in Docker** - For every push, we want to run our tests and this is where Travis comes in handy. Use GitLab runners, along with a .gitlab-ci.yml file, for GitLab continous integration. Notice the green "passing" box in the top of the module. This is scraped from Travis. 
 
 ## ToDo
-- **parameter sets** (perhaps with CMS handling for credentials?)
+- **parameter sets** (CMS handling | credentials)
 - **formatting with format.ps1xml?** type extentions with type.ps1xml? I'm not sure how type.ps1xml could be used in this example.
-- add Appveyor and Gitlab CI as continuous integration examples
+- **add Appveyor and Gitlab CI as continuous integration examples**
 
 ## Examples from the class not included
 - DSC - This doesn't really apply to PowerShell module development
