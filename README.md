@@ -29,7 +29,7 @@ Get-ServiceInformation -ComputerName MYCOMPUTER
 ## Additional examples, which were not covered in the class
 - **Test stubs for Pester** - This is a nice way to run Pester tests when a module, or function, does not exist in your test environment. For instance, if your module needs the ActiveDirectory module, and this isn't available in your test environment, you could simply use a stub to overwrite the function. See tests\stubs\ActiveDirectoryStrub.psm1 for an example. I should even note that you cannot mock a function that does not exist in your environment. PowerShell will run a "validate command" method on all functions called in your .psm1 file before your Pester script is called. This "validate command" method will fail even if your function is mocked.
 - **Exclusion rules for PSScriptAnalyzer using PSScriptAnalyzerSettings.psd1** - I didn't see any way to use in-line comments for exclusion rules for PSScript Analyzer. You can use exclusion rules on the command line (i.e. Invoke-ScriptAnalyzer -excluderule blablah), but then you loose consistency in your module. For instance, if someone else clones my module, there's no way that they would know which exclusion rules should be used. This allows for your exclusion rules to be defined within the module.
-- **Continuous integrations testing with Travis and Powershell Core in Docker** - For every push, we want to run our tests and this is where Travis comes in handy. Use GitLab runners, along with a .gitlab-ci.yml file, for GitLab continous integration. Notice the green "passing" box in the top of the module. This is scraped from Travis. 
+- **Continuous integration testing with Travis and Powershell Core in Docker** - For every push, we want to run our tests and this is where Travis comes in handy. Use GitLab runners, along with a .gitlab-ci.yml file, for GitLab continous integration. Notice the green "passing" box in the top of the module. This is scraped from Travis. 
 
 ## ToDo
 - **parameter sets** (CMS handling | credentials)
@@ -38,4 +38,4 @@ Get-ServiceInformation -ComputerName MYCOMPUTER
 
 ## Examples from the class not included
 - DSC - This doesn't really apply to PowerShell module development
-- Custom classes - I can't see a use case for this here. See above in examples for an explanation about this. 
+- Custom classes - I can't see a use case for this here. See above under "classes" for an explanation about why I chose not to include these.
