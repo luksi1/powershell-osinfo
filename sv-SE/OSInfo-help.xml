@@ -10,7 +10,7 @@
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Get disk information from the Command Infrastructure Model (CIM)</maml:para>
+      <maml:para>Hämta ut information ifrån Command Infrastructure Model (CIM)</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -18,7 +18,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
           <maml:name>ComputerName</maml:name>
           <maml:Description>
-            <maml:para>The name of the computer</maml:para>
+            <maml:para>Datornamnet</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -30,7 +30,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
           <maml:name>CMSEncryptedPassword</maml:name>
           <maml:Description>
-            <maml:para>{{Fill CMSEncryptedPassword Description}}</maml:para>
+            <maml:para>Ett CMS krypterat lösenord</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">FileInfo[]</command:parameterValue>
           <dev:type>
@@ -42,7 +42,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>Username</maml:name>
           <maml:Description>
-            <maml:para>{{Fill Username Description}}</maml:para>
+            <maml:para>Användarenamnet</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -57,7 +57,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
           <maml:name>ComputerName</maml:name>
           <maml:Description>
-            <maml:para>The name of the computer</maml:para>
+            <maml:para>Datornamnet</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -69,7 +69,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
           <maml:name>CMSEncryptedPasswordFile</maml:name>
           <maml:Description>
-            <maml:para>{{Fill CMSEncryptedPasswordFile Description}}</maml:para>
+            <maml:para>En fil med ett krypterat CMS lösenord</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">FileInfo[]</command:parameterValue>
           <dev:type>
@@ -81,7 +81,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>Username</maml:name>
           <maml:Description>
-            <maml:para>{{Fill Username Description}}</maml:para>
+            <maml:para>Användarenamnet</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -96,7 +96,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
           <maml:name>ComputerName</maml:name>
           <maml:Description>
-            <maml:para>The name of the computer</maml:para>
+            <maml:para>Datornamnet</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -108,7 +108,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
           <maml:name>Credential</maml:name>
           <maml:Description>
-            <maml:para>{{Fill Credential Description}}</maml:para>
+            <maml:para>Ett credential objekt</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">SecureString[]</command:parameterValue>
           <dev:type>
@@ -123,7 +123,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
           <maml:name>ComputerName</maml:name>
           <maml:Description>
-            <maml:para>The name of the computer</maml:para>
+            <maml:para>Datornamnet</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -135,7 +135,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
           <maml:name>Password</maml:name>
           <maml:Description>
-            <maml:para>{{Fill Password Description}}</maml:para>
+            <maml:para>Lösenord</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -147,7 +147,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>Username</maml:name>
           <maml:Description>
-            <maml:para>{{Fill Username Description}}</maml:para>
+            <maml:para>Användarenamnet</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -162,7 +162,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
         <maml:name>ComputerName</maml:name>
         <maml:Description>
-          <maml:para>The name of the computer</maml:para>
+          <maml:para>Datornamnet</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
@@ -174,7 +174,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
         <maml:name>CMSEncryptedPassword</maml:name>
         <maml:Description>
-          <maml:para>{{Fill CMSEncryptedPassword Description}}</maml:para>
+          <maml:para>Ett CMS krypterat lösenord</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">FileInfo[]</command:parameterValue>
         <dev:type>
@@ -186,7 +186,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
         <maml:name>CMSEncryptedPasswordFile</maml:name>
         <maml:Description>
-          <maml:para>{{Fill CMSEncryptedPasswordFile Description}}</maml:para>
+          <maml:para>En fil med ett krypterat CMS lösenord</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">FileInfo[]</command:parameterValue>
         <dev:type>
@@ -198,7 +198,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
         <maml:name>Credential</maml:name>
         <maml:Description>
-          <maml:para>{{Fill Credential Description}}</maml:para>
+          <maml:para>Ett credential objekt</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">SecureString[]</command:parameterValue>
         <dev:type>
@@ -210,7 +210,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
         <maml:name>Password</maml:name>
         <maml:Description>
-          <maml:para>{{Fill Password Description}}</maml:para>
+          <maml:para>Lösenord</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
@@ -222,7 +222,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>Username</maml:name>
         <maml:Description>
-          <maml:para>{{Fill Username Description}}</maml:para>
+          <maml:para>Användarenamnet</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
@@ -288,7 +288,7 @@
       <command:verb>Get</command:verb>
       <command:noun>ServiceInformation</command:noun>
       <maml:description>
-        <maml:para>Get service information</maml:para>
+        <maml:para>Hämta ut service information ifrån CIM (Computer Infrastructure Model)</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
@@ -300,7 +300,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
           <maml:name>ComputerName</maml:name>
           <maml:Description>
-            <maml:para>The name of the computer</maml:para>
+            <maml:para>Datornamnet</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -315,7 +315,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
           <maml:name>ComputerName</maml:name>
           <maml:Description>
-            <maml:para>The name of the computer</maml:para>
+            <maml:para>Datornamnet</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -327,7 +327,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
           <maml:name>Username</maml:name>
           <maml:Description>
-            <maml:para>{{Fill Username Description}}</maml:para>
+            <maml:para>Användarenamnet</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -339,7 +339,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
           <maml:name>Password</maml:name>
           <maml:Description>
-            <maml:para>{{Fill Password Description}}</maml:para>
+            <maml:para>Lösenordet</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -354,7 +354,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
           <maml:name>ComputerName</maml:name>
           <maml:Description>
-            <maml:para>The name of the computer</maml:para>
+            <maml:para>Datornamnet</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -366,7 +366,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
           <maml:name>Username</maml:name>
           <maml:Description>
-            <maml:para>{{Fill Username Description}}</maml:para>
+            <maml:para>Användarenamnet</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -378,7 +378,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
           <maml:name>CMSEncryptedPassword</maml:name>
           <maml:Description>
-            <maml:para>{{Fill CMSEncryptedPassword Description}}</maml:para>
+            <maml:para>Ett CMS krypterat lösenord</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">FileInfo[]</command:parameterValue>
           <dev:type>
@@ -393,7 +393,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
           <maml:name>ComputerName</maml:name>
           <maml:Description>
-            <maml:para>The name of the computer</maml:para>
+            <maml:para>Datornamnet</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -405,7 +405,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
           <maml:name>Username</maml:name>
           <maml:Description>
-            <maml:para>{{Fill Username Description}}</maml:para>
+            <maml:para>Användarenamnet</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -432,7 +432,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
           <maml:name>ComputerName</maml:name>
           <maml:Description>
-            <maml:para>The name of the computer</maml:para>
+            <maml:para>Datornamnet</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -444,7 +444,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
           <maml:name>Credential</maml:name>
           <maml:Description>
-            <maml:para>{{Fill Credential Description}}</maml:para>
+            <maml:para>En credential objekt</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">SecureString[]</command:parameterValue>
           <dev:type>
@@ -459,7 +459,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
         <maml:name>ComputerName</maml:name>
         <maml:Description>
-          <maml:para>The name of the computer</maml:para>
+          <maml:para>Datornamnet</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
@@ -471,7 +471,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
         <maml:name>Credential</maml:name>
         <maml:Description>
-          <maml:para>{{Fill Credential Description}}</maml:para>
+          <maml:para>En credential objekt</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">SecureString[]</command:parameterValue>
         <dev:type>
@@ -483,7 +483,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
         <maml:name>Username</maml:name>
         <maml:Description>
-          <maml:para>{{Fill Username Description}}</maml:para>
+          <maml:para>Användarenamnet</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
@@ -495,7 +495,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
         <maml:name>Password</maml:name>
         <maml:Description>
-          <maml:para>{{Fill Password Description}}</maml:para>
+          <maml:para>Lösenordet</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
@@ -519,7 +519,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
         <maml:name>CMSEncryptedPassword</maml:name>
         <maml:Description>
-          <maml:para>{{Fill CMSEncryptedPassword Description}}</maml:para>
+          <maml:para>Ett CMS krypterat lösenord</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">FileInfo[]</command:parameterValue>
         <dev:type>
