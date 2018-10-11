@@ -7,12 +7,11 @@ class ADComputer : System.Management.Automation.ValidateEnumeratedArgumentsAttri
         try {
             $computerName = Get-ADComputer $argument
             # There is no way to handle a typenotfound error when running pester
-            # if the class does not exist, it will throw an error while parsing
-            # it makes no difference whether this will get called or not
-            # maybe this could be mocked?
+            # if the class does not exist. It will throw an error while parsing the class.
+            # It makes no difference whether this will get called or not.
+            # Maybe this could be mocked? Stubbed?
             #} catch [Microsoft.ActiveDirectory.Management.ADIdentityNotFoundException] {
-        }
-        catch {
+        } catch {
             Write-Error "${argument} does not appear to exist in our Active Directory"
             throw $Error.Message
         }
@@ -28,12 +27,14 @@ class ADComputer : System.Management.Automation.ValidateEnumeratedArgumentsAttri
     Instead of embedding our dynamic validation logic inside the function, we can more easily move it to a private function.
     In this way, we can easily reuse the function *AND* we can mock it!
 .PARAMETER ParameterName 
-    Simply the parameter name in which we want to add dynamically to our function.
+   The parameter name in which we want to add dynamically to our function.
 #>
 function _setDynamicValidateSet {
     [cmdletbinding()]
     param(
-        [string] $ParameterName
+        [Parameter(Mandatory)]
+        [string] $ParameterName,
+        [string] $ParameterSet
     )
 
     $arraySet = _getDynamicValidateSet
@@ -47,6 +48,9 @@ function _setDynamicValidateSet {
     # Create and set the parameters' attributes
     $ParameterAttribute = New-Object System.Management.Automation.ParameterAttribute
     $ParameterAttribute.Position = 1
+    if ($ParameterSet) {
+        $ParameterAttribute.ParameterSetName = $ParameterSet
+    }
 
     # Add the attributes to the attributes collection
     $AttributeCollection.Add($ParameterAttribute)
@@ -71,6 +75,13 @@ function _setDynamicValidateSet {
 function _getDynamicValidateSet {
     # insert code here
     # this should return an array
+    # Ex. Get all Active Directory servers
+    # (Get-ADComputer -Filter *).
+    # Ex. Get a subset of Active Directory servers
+    # (Get-ADComputer -Filter 'Name -like "foo*"').Name
+    # Ex. Get all files in directory
+    # (Get-ChildItem).Name
+    # Here we simply use the localhost names for simplicity
     @("localhost", $env:COMPUTERNAME)
 }
 
@@ -90,24 +101,63 @@ function _getDynamicValidateSet {
 #>
 function Get-ServiceInformation {
     [alias("gsi")]
-    [cmdletbinding()]
+    [cmdletbinding(DefaultParameterSetName="defaultcredentials")]
     param (
-        [parameter(position = 0, valuefrompipeline, valuefrompipelinebypropertyname)]
+        [Parameter(Position = 0, ValueFromPipeline, ValueFromPipelineByPropertyName)]
+        [Parameter(ParameterSetName='cmspasswordfile')]
+        [Parameter(ParameterSetName='cmspasswordstring')]
+        [Parameter(ParameterSetName='defaultcredentials')]
+        [Parameter(ParameterSetName='usernamepassword')]
+        [Parameter(ParameterSetName='credentials')]
         [ArgumentCompleter( {
-                foreach ( $computer in (Get-ADComputer -filter *).Name ) {
-                    [System.Management.Automation.CompletionResult]::new($computer, $computer, [System.Management.Automation.CompletionResultType]::ParameterValue, $computer)
-                }
-            })]
-        [adcomputer()]
-        [string[]] $ComputerName
+            foreach ( $computer in (Get-ADComputer -filter *).Name ) {
+                [System.Management.Automation.CompletionResult]::new($computer, $computer, [System.Management.Automation.CompletionResultType]::ParameterValue, $computer)
+            }
+        })]
+        [ADComputer()]
+        [String[]] $ComputerName,
+        [Parameter(ParameterSetName='credentials', ValueFromPipelineByPropertyName)]
+        [System.Management.Automation.PSCredential[]] $Credential,
+        [Parameter(ParameterSetName='usernamepassword', Mandatory, ValueFromPipelineByPropertyName)]
+        [Parameter(ParameterSetName='cmspasswordfile')]
+        [Parameter(ParameterSetName='cmspasswordstring')]
+        [String[]] $Username,
+        [parameter(ParameterSetName='usernamepassword', Mandatory, ValueFromPipelineByPropertyName)]
+        [String[]] $Password,
+        [Parameter(ParameterSetName='cmspasswordfile', Mandatory, ValueFromPipelineByPropertyName)]
+        [System.IO.FileInfo[]] $CMSEncryptedPasswordFile,
+        [Parameter(ParameterSetName='cmspasswordstring', Mandatory, ValueFromPipelineByPropertyName)]
+        [System.IO.FileInfo[]] $CMSEncryptedPassword
     )
 
-    begin { 
-        if ($ComputerName) { 
-            New-CimSession -ComputerName $ComputerName | Out-Null
-        }
-        else {
-            New-CimSession | Out-Null
+    begin {
+        switch ($PSCmdlet.ParameterSetName) {
+            "defaultcredentials" {
+                if ($ComputerName) { 
+                    New-CimSession -ComputerName $ComputerName | Out-Null 
+                } else { 
+                    New-CimSession | Out-Null 
+                }
+            }
+            "credentials" {
+                New-CimSession -ComputerName $ComputerName -Credential $Credential
+            }
+            "usernamepassword" {
+                $mysecurepassword = $Password | ConvertTo-SecureString -AsPlainText -Force
+                $Credential = New-Object System.Management.Automation.PSCredential($Username, $mysecurepassword)
+                New-CimSession -ComputerName $ComputerName -Credential $Credential
+            }
+            "cmspasswordfile" {
+                $mysecurepassword = ConvertTo-SecureString (Unprotect-CmsMessage -Path $CMSEncryptedPasswordFile) -AsPlainText -Force
+                $Credential = New-Object System.Management.Automation.PSCredential($Username, $mysecurepassword)
+                New-CimSession -ComputerName $ComputerName -Credential $Credential
+            }
+            "cmspasswordstring" {
+                $mysecurepassword = ConvertTo-SecureString (Unprotect-CmsMessage -Content $CMSEncryptedPassword) -AsPlainText -Force
+                $Credential = New-Object System.Management.Automation.PSCredential($Username, $mysecurepassword)
+                New-CimSession -ComputerName $ComputerName -Credential $Credential
+            }
+            Default { throw "no parameter sets were matched"}
         }
     }
 
@@ -126,41 +176,65 @@ function Get-ServiceInformation {
 
 }
 
-<#
-.SYNOPSIS
-    Get disk information from the Computer Information Model (CIM)
-.PARAMETER ComputerName
-    A remote computer name to query disk information
-.OUTPUTS
-    A PSCustomObject with "SizeMB","FreeSizeMB","PercentFree","ComputerName"
-.EXAMPLE
-    Get-DiskInformation -ComputerName "Foo"
-.EXAMPLE
-    "foo" | Get-DiskInformation
-.EXAMPLE
-    Get-DiskInformation
-#>
 function Get-DiskInformation {
     [alias("gdi")]
-    [cmdletbinding()]
-    param()
+    [cmdletbinding(DefaultParameterSetName="defaultcredentials")]
+    param (
+        [Parameter(ParameterSetName='credentials', Mandatory, ValueFromPipelineByPropertyName)]
+        [System.Management.Automation.PSCredential[]] $Credential,
+        [Parameter(ParameterSetName='usernamepassword', Mandatory, ValueFromPipelineByPropertyName)]
+        [Parameter(ParameterSetName='cmspasswordfile', Mandatory, ValueFromPipelineByPropertyName)]
+        [Parameter(ParameterSetName='cmspasswordstring', Mandatory, ValueFromPipelineByPropertyName)]
+        [String[]] $Username,
+        [parameter(ParameterSetName='usernamepassword', Mandatory, ValueFromPipelineByPropertyName)]
+        [String[]] $Password,
+        [Parameter(ParameterSetName='cmspasswordfile', Mandatory, ValueFromPipelineByPropertyName)]
+        [String[]] $CMSEncryptedPasswordFile,
+        [Parameter(ParameterSetName='cmspasswordstring', Mandatory, ValueFromPipelineByPropertyName)]
+        [String[]] $CMSEncryptedPassword
+    )
     DynamicParam {
         $DynamicParameterName = "ComputerName"
         _setDynamicValidateSet($DynamicParameterName)
     }
 
     begin {
-        # You need to bind the dynamic parameter to a variable!
-        $ComputerName = $PsBoundParameters[$DynamicParameterName]
+        # ComputerName will not be in the scope of the module. In other words,
+        # you cannot call $ComputerName in your begin{}, process{}, or end{} block.
+        # You can though get the variable from the $PSBoundParameters dictionary
+        $ComputerName = $PSBoundParameters["ComputerName"]
 
-        # If computername is not set, then we need to get a CIM session locally
-        if ($ComputerName) { 
-            New-CimSession -ComputerName $ComputerName | Out-Null
+        # Use a case statement to create our CIM session, with parameters based on
+        # our validate sets.
+        switch ($PSCmdlet.ParameterSetName) {
+            "defaultcredentials" {
+                if ($ComputerName) { 
+                    New-CimSession -ComputerName $ComputerName | Out-Null 
+                } else { 
+                    New-CimSession | Out-Null
+                }
+            }
+            "credentials" {
+                New-CimSession -ComputerName $ComputerName -Credential $Credential
+            }
+            "usernamepassword" {
+                $mysecurepassword = $Password | ConvertTo-SecureString -AsPlainText -Force
+                $usernamepasswordCredential = New-Object System.Management.Automation.PSCredential($Username, $mysecurepassword)
+                New-CimSession -ComputerName $ComputerName -Credential $usernamepasswordCredential
+            }
+            "cmspasswordfile" {
+                $password = Unprotect-CmsMessage -Path $CMSEncryptedPasswordFile
+                $mysecurepassword = $password | ConvertTo-SecureString -AsPlainText -Force
+                $cmspasswordfileCredential = New-Object System.Management.Automation.PSCredential($Username, $mysecurepassword)
+                New-CimSession -ComputerName $ComputerName -Credential $cmspasswordfileCredential
+            }
+            "cmspasswordstring" {
+                $mysecurepassword = ConvertTo-SecureString (Unprotect-CmsMessage -Content $CMSEncryptedPassword) -AsPlainText -Force
+                $credential = New-Object System.Management.Automation.PSCredential($Username, $mysecurepassword)
+                New-CimSession -ComputerName $ComputerName -Credential $credential
+            }
+            Default { throw "no parameter sets were matched"}
         }
-        else {
-            New-CimSession | Out-Null
-        }
-        "computername = $ComputerName"
     }
 
     process {
@@ -178,5 +252,3 @@ function Get-DiskInformation {
 
     end { Get-CimSession | Remove-CimSession }
 }
-
-

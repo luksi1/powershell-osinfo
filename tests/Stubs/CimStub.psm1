@@ -1,7 +1,10 @@
 function New-CimSession {
     [cmdletbinding()]
     param(
-        [string[]] $ComputerName
+        [string[]] $ComputerName,
+        [pscredential[]] $Credential,
+        [string[]] $CMSEncryptedPasswordFile,
+        [string[]] $CMSEncryptedPassword
     )
 
     throw '{0}: StubNotImplemented' -f $MyInvocation.MyCommand
