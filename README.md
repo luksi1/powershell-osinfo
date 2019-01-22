@@ -4,7 +4,9 @@
 
 ## Description
 
-Get disk and service information from the Common Infrastructure Model (CIM) via PowerShell
+This is a demo focused on some advanced PowerShell scripting techniques pieced together after a one week course with Jeffrey Hicks.
+
+This demo get disk and service information from the Common Infrastructure Model (CIM).
 
 ## Usage
 
