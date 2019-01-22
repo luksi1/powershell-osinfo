@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/luksi1/docker-mssql.svg?branch=master)](https://travis-ci.org/luksi1/powershell-osinfo)
+[![Build Status](https://travis-ci.org/luksi1/powershell-osinfo.svg?branch=master)](https://travis-ci.org/luksi1/powershell-osinfo)
 
 # powershell-osinfo
 
