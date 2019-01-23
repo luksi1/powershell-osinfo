@@ -117,7 +117,9 @@ function Get-ServiceInformation {
         [ADComputer()]
         [String[]] $ComputerName,
         [Parameter(ParameterSetName='credentials', ValueFromPipelineByPropertyName)]
-        [System.Management.Automation.PSCredential[]] $Credential,
+        [System.Management.Automation.PSCredential]
+        [System.Management.Automation.Credential()]
+        $Credential,
         [Parameter(ParameterSetName='usernamepassword', Mandatory, ValueFromPipelineByPropertyName)]
         [Parameter(ParameterSetName='cmspasswordfile')]
         [Parameter(ParameterSetName='cmspasswordstring')]
@@ -181,7 +183,9 @@ function Get-DiskInformation {
     [cmdletbinding(DefaultParameterSetName="defaultcredentials")]
     param (
         [Parameter(ParameterSetName='credentials', Mandatory, ValueFromPipelineByPropertyName)]
-        [System.Management.Automation.PSCredential[]] $Credential,
+        [System.Management.Automation.PSCredential]
+        [System.Management.Automation.Credential()]
+        $Credential,
         [Parameter(ParameterSetName='usernamepassword', Mandatory, ValueFromPipelineByPropertyName)]
         [Parameter(ParameterSetName='cmspasswordfile', Mandatory, ValueFromPipelineByPropertyName)]
         [Parameter(ParameterSetName='cmspasswordstring', Mandatory, ValueFromPipelineByPropertyName)]
