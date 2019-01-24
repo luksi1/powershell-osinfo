@@ -20,7 +20,7 @@
     # PSAvoidUsingComputerNameHardcoded is excluded due to our stubs
     # PSUseShouldProcessForStateChangingFunctions is excluded due to our stubs.
     # PSAvoidUsingPlainTextForPassword is excluded since we want to only for username / password input
-    ExcludeRules = @('PSAvoidUsingComputerNameHardcoded','PSUseShouldProcessForStateChangingFunctions','PSAvoidUsingPlainTextForPassword')
+    ExcludeRules = @('PSAvoidUsingConvertToSecureStringWithPlainText','PSAvoidUsingComputerNameHardcoded','PSUseShouldProcessForStateChangingFunctions','PSAvoidUsingPlainTextForPassword')
 
     # You can use the following entry to supply parameters to rules that take parameters.
     # For instance, the PSAvoidUsingCmdletAliases rule takes a whitelist for aliases you

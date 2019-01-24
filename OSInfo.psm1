@@ -104,10 +104,7 @@ function Get-ServiceInformation {
     [cmdletbinding(DefaultParameterSetName="defaultcredentials")]
     param (
         [Parameter(Position = 0, ValueFromPipeline, ValueFromPipelineByPropertyName)]
-        [Parameter(ParameterSetName='cmspasswordfile')]
-        [Parameter(ParameterSetName='cmspasswordstring')]
         [Parameter(ParameterSetName='defaultcredentials')]
-        [Parameter(ParameterSetName='usernamepassword')]
         [Parameter(ParameterSetName='credentials')]
         [ArgumentCompleter( {
             foreach ( $computer in (Get-ADComputer -filter *).Name ) {
@@ -119,17 +116,7 @@ function Get-ServiceInformation {
         [Parameter(ParameterSetName='credentials', ValueFromPipelineByPropertyName)]
         [System.Management.Automation.PSCredential]
         [System.Management.Automation.Credential()]
-        $Credential,
-        [Parameter(ParameterSetName='usernamepassword', Mandatory, ValueFromPipelineByPropertyName)]
-        [Parameter(ParameterSetName='cmspasswordfile')]
-        [Parameter(ParameterSetName='cmspasswordstring')]
-        [String[]] $Username,
-        [parameter(ParameterSetName='usernamepassword', Mandatory, ValueFromPipelineByPropertyName)]
-        [String[]] $Password,
-        [Parameter(ParameterSetName='cmspasswordfile', Mandatory, ValueFromPipelineByPropertyName)]
-        [System.IO.FileInfo[]] $CMSEncryptedPasswordFile,
-        [Parameter(ParameterSetName='cmspasswordstring', Mandatory, ValueFromPipelineByPropertyName)]
-        [System.IO.FileInfo[]] $CMSEncryptedPassword
+        $Credential
     )
 
     begin {
@@ -142,21 +129,6 @@ function Get-ServiceInformation {
                 }
             }
             "credentials" {
-                New-CimSession -ComputerName $ComputerName -Credential $Credential
-            }
-            "usernamepassword" {
-                $mysecurepassword = $Password | ConvertTo-SecureString -AsPlainText -Force
-                $Credential = New-Object System.Management.Automation.PSCredential($Username, $mysecurepassword)
-                New-CimSession -ComputerName $ComputerName -Credential $Credential
-            }
-            "cmspasswordfile" {
-                $mysecurepassword = ConvertTo-SecureString (Unprotect-CmsMessage -Path $CMSEncryptedPasswordFile) -AsPlainText -Force
-                $Credential = New-Object System.Management.Automation.PSCredential($Username, $mysecurepassword)
-                New-CimSession -ComputerName $ComputerName -Credential $Credential
-            }
-            "cmspasswordstring" {
-                $mysecurepassword = ConvertTo-SecureString (Unprotect-CmsMessage -Content $CMSEncryptedPassword) -AsPlainText -Force
-                $Credential = New-Object System.Management.Automation.PSCredential($Username, $mysecurepassword)
                 New-CimSession -ComputerName $ComputerName -Credential $Credential
             }
             Default { throw "no parameter sets were matched"}
@@ -185,17 +157,7 @@ function Get-DiskInformation {
         [Parameter(ParameterSetName='credentials', Mandatory, ValueFromPipelineByPropertyName)]
         [System.Management.Automation.PSCredential]
         [System.Management.Automation.Credential()]
-        $Credential,
-        [Parameter(ParameterSetName='usernamepassword', Mandatory, ValueFromPipelineByPropertyName)]
-        [Parameter(ParameterSetName='cmspasswordfile', Mandatory, ValueFromPipelineByPropertyName)]
-        [Parameter(ParameterSetName='cmspasswordstring', Mandatory, ValueFromPipelineByPropertyName)]
-        [String[]] $Username,
-        [parameter(ParameterSetName='usernamepassword', Mandatory, ValueFromPipelineByPropertyName)]
-        [String[]] $Password,
-        [Parameter(ParameterSetName='cmspasswordfile', Mandatory, ValueFromPipelineByPropertyName)]
-        [String[]] $CMSEncryptedPasswordFile,
-        [Parameter(ParameterSetName='cmspasswordstring', Mandatory, ValueFromPipelineByPropertyName)]
-        [String[]] $CMSEncryptedPassword
+        $Credential
     )
     DynamicParam {
         $DynamicParameterName = "ComputerName"
@@ -220,22 +182,6 @@ function Get-DiskInformation {
             }
             "credentials" {
                 New-CimSession -ComputerName $ComputerName -Credential $Credential
-            }
-            "usernamepassword" {
-                $mysecurepassword = $Password | ConvertTo-SecureString -AsPlainText -Force
-                $usernamepasswordCredential = New-Object System.Management.Automation.PSCredential($Username, $mysecurepassword)
-                New-CimSession -ComputerName $ComputerName -Credential $usernamepasswordCredential
-            }
-            "cmspasswordfile" {
-                $password = Unprotect-CmsMessage -Path $CMSEncryptedPasswordFile
-                $mysecurepassword = $password | ConvertTo-SecureString -AsPlainText -Force
-                $cmspasswordfileCredential = New-Object System.Management.Automation.PSCredential($Username, $mysecurepassword)
-                New-CimSession -ComputerName $ComputerName -Credential $cmspasswordfileCredential
-            }
-            "cmspasswordstring" {
-                $mysecurepassword = ConvertTo-SecureString (Unprotect-CmsMessage -Content $CMSEncryptedPassword) -AsPlainText -Force
-                $credential = New-Object System.Management.Automation.PSCredential($Username, $mysecurepassword)
-                New-CimSession -ComputerName $ComputerName -Credential $credential
             }
             Default { throw "no parameter sets were matched"}
         }
